@@ -1,65 +1,44 @@
-import React, { Component } from 'react';
-import './index';
+import './App.css';
+import { React } from 'react';
+import "./App.css";
+import Education from "./components/Education";
+import HeadShot from "./components/HeadShot/HeadShot";
+import About from "./components/About";
+import FullResume from "./components/Fullresume";
+import Testimonials from "./components/Testimonials";
+import Email from "./components/Email";
+import Charity from "./components/Charity";
+import "./App.css";
+import Navigation from './components/Navigation';
+import { BrowserRouter, Route } from "react-router-dom";
+import { Routes } from 'react-router';
 
-const API_ADDRESS = 'https://spotify-api-wrapper.appspot.com';
 
-class App extends Component {
+function App(){
+  return (
+    <div className="App">
+     
+    <BrowserRouter>
+    <Navigation />
+    <Routes>
+    <Route path="home"  exact element={ <HeadShot/> } />
+    <Route path="/about" exact element={<About/>}/>
+    <Route  path="/contact" exact element={<Email/>}/>
+    <Route  path="/fullresume" exact element={<FullResume/>}/>
+    <Route  path="/testimonials" exact element={<Testimonials/>}/>
+    <Route  path="/education" exact element={<Education/>} />
+    <Route path="/charity" exact element={<Charity/>}/>
+    </Routes>
+    </BrowserRouter>
+
     
-
-state = { artistQuery: ''};
-
-
-updateArtistQuery = event => {
-    this.setState({artistQuery: event.target.value});
-    console.log('event.target.value',event.target.value);
-
-}
-
-searchArtist = () => {
-    console.log('this.state',this.state);
-
-    fetch(`${API_ADDRESS}/artist/${this.state.artistQuery}`)
-    .then(response => response.json())
-    .then(json => {
-        console.log('json', json);
-        
-        if (json.artists.total > 0)
-        {
-            const artist = json.artists.items[0];
-            this.setState({artist});
-        }
-    });
-}
-
-handleKeyPress = event => {
-    if (event.onKeyPress == 'Enter')
-    {
-        this.searchArtist();
-    }
     
-}
-   
-    render(){
-        return(
-        <div>
-            
-           <h2>Music Master</h2>
-           <input 
-           onChange = {this.updateArtistQuery}
-           onKeyPress = {this.handleKeyPress}
-           placeholder = 'Search for an artist' 
-           />
-           <button onClick={this.searchArtist}>Search</button>
-        
         </div>
-        );
-       
+
+        
+      );
+
     
-        }      
+    } 
     
-}
-
-
-
-
-export default App;
+  export default App;
