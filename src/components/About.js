@@ -9,7 +9,7 @@ function About (){
     <section id="about">
    
    <img
-             className="about"
+  className="about"
    src={Tropies}
    style={{ height: '10%',
         padding: '15px', 
